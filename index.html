@@ -12,24 +12,43 @@
       color-scheme: light only;
     }
 
-    html, body {
+    html {
       margin: 0;
       padding: 0;
       width: 100%;
       height: 100%;
-      overflow: hidden;
+      overflow-x: hidden;
+      background-color: white;
+      color-scheme: light only;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
       font-family: 'DM Sans', Arial, sans-serif;
       background-color: white;
       color: black;
       color-scheme: light only;
     }
 
+    body.gate-active {
+      height: 100%;
+      overflow: hidden;
+    }
+
     iframe {
+      display: block;
       border: none;
       width: 100%;
-      height: 100%;
+      height: 100dvh;
+      min-height: 100dvh;
       background-color: white;
       color-scheme: light only;
+      overflow: auto;
     }
 
     /* Gate */
@@ -201,13 +220,22 @@
     }
 
     .content {
-      display: none;
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
       width: 100%;
-      height: 100%;
+      height: 100dvh;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      background: white;
     }
 
     .content.on {
-      display: block;
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
     }
 
     @media(max-width:600px) {
@@ -229,10 +257,15 @@
         max-height: 130px;
         font-size: 11px;
       }
+
+      iframe {
+        height: 100dvh;
+        min-height: 100dvh;
+      }
     }
   </style>
 </head>
-<body>
+<body class="gate-active">
 
 <!-- GATE -->
 <div class="gate" id="gate">
@@ -266,11 +299,12 @@
   </div>
 </div>
 
-<!-- CONTENT (hidden until auth) -->
+<!-- CONTENT -->
 <div class="content" id="content">
   <iframe
     src="https://coda.io/embed/MkiHpceakY/_sutUscp-?hideSections=true"
-    allow="fullscreen">
+    allow="fullscreen"
+    scrolling="yes">
   </iframe>
 </div>
 
@@ -311,6 +345,7 @@ async function tryAccess(){
     return;
   }
   document.getElementById('gate').classList.add('hidden');
+  document.body.classList.remove('gate-active');
   document.getElementById('content').classList.add('on');
 }
 </script>
