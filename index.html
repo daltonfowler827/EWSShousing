@@ -4,20 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>EWSS Housing Guide</title>
-  <meta name="color-scheme" content="light only">
+
+  <meta name="color-scheme" content="only light">
+  <meta name="supported-color-schemes" content="light">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
   <style>
     :root {
       --yb: #00356b;
       --mobile-coda-height: 14000px;
-      color-scheme: light only;
+      color-scheme: only light;
     }
 
     *,
     *::before,
     *::after {
       box-sizing: border-box;
+      color-scheme: only light;
     }
 
     html {
@@ -26,8 +32,9 @@
       width: 100%;
       min-height: 100%;
       overflow-x: hidden;
-      background-color: white;
-      color-scheme: light only;
+      background-color: #ffffff;
+      color: #000000;
+      color-scheme: only light;
     }
 
     body {
@@ -38,9 +45,9 @@
       overflow-x: hidden;
       overflow-y: auto;
       font-family: 'DM Sans', Arial, sans-serif;
-      background-color: white;
-      color: black;
-      color-scheme: light only;
+      background-color: #ffffff;
+      color: #000000;
+      color-scheme: only light;
     }
 
     body.gate-active {
@@ -54,8 +61,15 @@
       width: 100%;
       height: 100vh;
       min-height: 100vh;
-      background-color: white;
-      color-scheme: light only;
+      background-color: #ffffff;
+      color-scheme: only light;
+    }
+
+    input,
+    textarea,
+    select,
+    button {
+      color-scheme: only light;
     }
 
     /* Gate */
@@ -69,6 +83,7 @@
       justify-content: center;
       padding: 14px;
       transition: opacity .4s;
+      color-scheme: only light;
     }
 
     .gate::before {
@@ -88,6 +103,7 @@
       position: relative;
       z-index: 1;
       background: rgba(255, 255, 255, 0.96);
+      color: #000000;
       border-radius: 18px;
       padding: 36px 32px;
       width: min(440px, calc(100vw - 28px));
@@ -96,6 +112,7 @@
       overflow-x: hidden;
       overflow-y: auto;
       box-shadow: 0 20px 60px rgba(0,0,0,.18);
+      color-scheme: only light;
     }
 
     .gate-card h1 {
@@ -109,29 +126,30 @@
     .gate-card .gate-sub {
       text-align: center;
       font-size: 12px;
-      color: #999;
+      color: #999999;
       margin: 4px 0 18px;
       letter-spacing: .06em;
     }
 
     .gate-welcome {
       font-size: 13px;
-      color: #555;
+      color: #555555;
       line-height: 1.7;
       margin-bottom: 16px;
     }
 
     .gate-terms {
       background: #f8f7f5;
+      color: #666666;
       border-radius: 10px;
       padding: 14px;
       max-height: 170px;
       overflow-y: auto;
       margin-bottom: 14px;
-      border: 1px solid #eee;
+      border: 1px solid #eeeeee;
       font-size: 11.5px;
-      color: #666;
       line-height: 1.65;
+      color-scheme: only light;
     }
 
     .gate-terms h4 {
@@ -162,11 +180,13 @@
       width: 15px;
       height: 15px;
       flex-shrink: 0;
+      background-color: #ffffff;
+      color-scheme: only light;
     }
 
     .gate-check label {
       font-size: 12px;
-      color: #666;
+      color: #666666;
       line-height: 1.5;
       cursor: pointer;
     }
@@ -175,7 +195,7 @@
       display: block;
       font-size: 10px;
       font-weight: 600;
-      color: #999;
+      color: #999999;
       text-transform: uppercase;
       letter-spacing: .06em;
       margin-bottom: 3px;
@@ -184,16 +204,29 @@
     .gate-pw input {
       width: 100%;
       padding: 10px 12px;
-      border: 1.5px solid #ddd;
+      border: 1.5px solid #dddddd;
       border-radius: 10px;
       font-family: 'DM Sans', sans-serif;
       font-size: 16px;
       outline: none;
       box-sizing: border-box;
+      background-color: #ffffff;
+      color: #111111;
+      -webkit-text-fill-color: #111111;
+      color-scheme: only light;
+    }
+
+    .gate-pw input::placeholder {
+      color: #999999;
+      -webkit-text-fill-color: #999999;
+      opacity: 1;
     }
 
     .gate-pw input:focus {
       border-color: var(--yb);
+      background-color: #ffffff;
+      color: #111111;
+      -webkit-text-fill-color: #111111;
     }
 
     .gate-err {
@@ -207,13 +240,14 @@
       width: 100%;
       padding: 11px;
       background: var(--yb);
-      color: #fff;
+      color: #ffffff;
       border: none;
       border-radius: 10px;
       font-family: 'DM Sans', sans-serif;
       font-weight: 700;
       font-size: 13px;
       cursor: pointer;
+      color-scheme: only light;
     }
 
     .gate-go:disabled {
@@ -225,7 +259,7 @@
       text-align: center;
       margin-top: 14px;
       font-size: 9.5px;
-      color: #bbb;
+      color: #bbbbbb;
       line-height: 1.5;
     }
 
@@ -233,11 +267,62 @@
       display: none;
       width: 100%;
       min-height: 100vh;
-      background: white;
+      background: #ffffff;
+      color: #000000;
+      color-scheme: only light;
     }
 
     .content.on {
       display: block;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      html,
+      body,
+      .content,
+      iframe {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        color-scheme: only light !important;
+      }
+
+      .gate-card {
+        background: rgba(255, 255, 255, 0.96) !important;
+        color: #000000 !important;
+      }
+
+      .gate-terms {
+        background: #f8f7f5 !important;
+        color: #666666 !important;
+        border-color: #eeeeee !important;
+      }
+
+      .gate-welcome,
+      .gate-check label {
+        color: #555555 !important;
+      }
+
+      .gate-card .gate-sub,
+      .gate-pw label {
+        color: #999999 !important;
+      }
+
+      .gate-pw input {
+        background-color: #ffffff !important;
+        color: #111111 !important;
+        -webkit-text-fill-color: #111111 !important;
+        border-color: #dddddd !important;
+      }
+
+      .gate-pw input::placeholder {
+        color: #999999 !important;
+        -webkit-text-fill-color: #999999 !important;
+      }
+
+      .gate-go {
+        background: var(--yb) !important;
+        color: #ffffff !important;
+      }
     }
 
     @media(max-width:768px) {
@@ -247,6 +332,9 @@
         min-height: 100%;
         overflow-x: hidden;
         overflow-y: auto;
+        background-color: #ffffff;
+        color: #000000;
+        color-scheme: only light;
       }
 
       body.gate-active {
@@ -285,12 +373,16 @@
         height: auto;
         min-height: 100vh;
         overflow: visible;
+        background-color: #ffffff;
+        color-scheme: only light;
       }
 
       iframe {
         height: var(--mobile-coda-height);
         min-height: 100vh;
         overflow: visible;
+        background-color: #ffffff;
+        color-scheme: only light;
       }
     }
   </style>
