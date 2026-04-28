@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>EWSS Housing Guide</title>
   <meta name="color-scheme" content="light only">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -10,7 +10,14 @@
   <style>
     :root {
       --yb: #00356b;
+      --mobile-coda-height: 14000px;
       color-scheme: light only;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
     }
 
     html {
@@ -60,6 +67,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 14px;
       transition: opacity .4s;
     }
 
@@ -82,9 +90,10 @@
       background: rgba(255, 255, 255, 0.96);
       border-radius: 18px;
       padding: 36px 32px;
-      width: 440px;
-      max-width: 94vw;
+      width: min(440px, calc(100vw - 28px));
+      max-width: calc(100vw - 28px);
       max-height: 92vh;
+      overflow-x: hidden;
       overflow-y: auto;
       box-shadow: 0 20px 60px rgba(0,0,0,.18);
     }
@@ -94,6 +103,7 @@
       font-size: 22px;
       color: var(--yb);
       text-align: center;
+      margin-top: 0;
     }
 
     .gate-card .gate-sub {
@@ -130,7 +140,7 @@
       text-transform: uppercase;
       letter-spacing: .08em;
       color: var(--yb);
-      margin-bottom: 6px;
+      margin: 0 0 6px;
     }
 
     .gate-terms ul {
@@ -177,7 +187,7 @@
       border: 1.5px solid #ddd;
       border-radius: 10px;
       font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
+      font-size: 16px;
       outline: none;
       box-sizing: border-box;
     }
@@ -244,7 +254,15 @@
         overflow: hidden;
       }
 
+      .gate {
+        align-items: center;
+        justify-content: center;
+        padding: 14px;
+      }
+
       .gate-card {
+        width: calc(100vw - 28px);
+        max-width: calc(100vw - 28px);
         padding: 20px 18px;
         border-radius: 14px;
         max-height: 95vh;
@@ -269,12 +287,8 @@
         overflow: visible;
       }
 
-      .content.on {
-        display: block;
-      }
-
       iframe {
-        height: 4200px;
+        height: var(--mobile-coda-height);
         min-height: 100vh;
         overflow: visible;
       }
@@ -379,6 +393,7 @@ async function tryAccess(){
   document.getElementById('gate').classList.add('hidden');
   document.body.classList.remove('gate-active');
   document.getElementById('content').classList.add('on');
+  window.scrollTo(0, 0);
 }
 </script>
 
