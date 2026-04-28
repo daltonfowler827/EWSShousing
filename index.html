@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Housing Guide</title>
+  <title>EWSS Housing Guide</title>
   <meta name="color-scheme" content="light only">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <style>
@@ -11,6 +11,7 @@
       --yb: #00356b;
       color-scheme: light only;
     }
+
     html, body {
       margin: 0;
       padding: 0;
@@ -22,6 +23,7 @@
       color: black;
       color-scheme: light only;
     }
+
     iframe {
       border: none;
       width: 100%;
@@ -31,34 +33,202 @@
     }
 
     /* Gate */
-    .gate{position:fixed;inset:0;z-index:99999;background:rgba(255,255,255,0.40);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;transition:opacity .4s}
-    .gate.hidden{opacity:0;pointer-events:none}
-    .gate-card{background:#fff;border-radius:18px;padding:36px 32px;width:440px;max-width:94vw;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.15)}
-    .gate-card h1{font-family:'Playfair Display',serif;font-size:22px;color:var(--yb);text-align:center}
-    .gate-card .gate-sub{text-align:center;font-size:12px;color:#999;margin:4px 0 18px;letter-spacing:.06em}
-    .gate-welcome{font-size:13px;color:#555;line-height:1.7;margin-bottom:16px}
-    .gate-terms{background:#f8f7f5;border-radius:10px;padding:14px;max-height:170px;overflow-y:auto;margin-bottom:14px;border:1px solid #eee;font-size:11.5px;color:#666;line-height:1.65}
-    .gate-terms h4{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--yb);margin-bottom:6px}
-    .gate-terms ul{padding-left:16px;margin:4px 0}
-    .gate-check{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px;cursor:pointer}
-    .gate-check input{margin-top:3px;accent-color:var(--yb);width:15px;height:15px;flex-shrink:0}
-    .gate-check label{font-size:12px;color:#666;line-height:1.5;cursor:pointer}
-    .gate-pw label{display:block;font-size:10px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
-    .gate-pw input{width:100%;padding:10px 12px;border:1.5px solid #ddd;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;box-sizing:border-box}
-    .gate-pw input:focus{border-color:var(--yb)}
-    .gate-err{font-size:11px;color:#e74c3c;min-height:16px;margin:6px 0}
-    .gate-go{width:100%;padding:11px;background:var(--yb);color:#fff;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer}
-    .gate-go:disabled{opacity:.35;cursor:not-allowed}
-    .gate-foot{text-align:center;margin-top:14px;font-size:9.5px;color:#bbb;line-height:1.5}
+    .gate {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: url("housing_background.jpg") center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity .4s;
+    }
 
-    .content{display:none;width:100%;height:100%}
-    .content.on{display:block}
+    .gate::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.35);
+      z-index: 0;
+    }
 
-    @media(max-width:600px){
-      .gate-card{padding:20px 18px;border-radius:14px;max-height:95vh}
-      .gate-card h1{font-size:19px}
-      .gate-welcome{font-size:12px}
-      .gate-terms{max-height:130px;font-size:11px}
+    .gate.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .gate-card {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: 18px;
+      padding: 36px 32px;
+      width: 440px;
+      max-width: 94vw;
+      max-height: 92vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,.18);
+    }
+
+    .gate-card h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: var(--yb);
+      text-align: center;
+    }
+
+    .gate-card .gate-sub {
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+      margin: 4px 0 18px;
+      letter-spacing: .06em;
+    }
+
+    .gate-welcome {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .gate-terms {
+      background: #f8f7f5;
+      border-radius: 10px;
+      padding: 14px;
+      max-height: 170px;
+      overflow-y: auto;
+      margin-bottom: 14px;
+      border: 1px solid #eee;
+      font-size: 11.5px;
+      color: #666;
+      line-height: 1.65;
+    }
+
+    .gate-terms h4 {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--yb);
+      margin-bottom: 6px;
+    }
+
+    .gate-terms ul {
+      padding-left: 16px;
+      margin: 4px 0;
+    }
+
+    .gate-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 14px;
+      cursor: pointer;
+    }
+
+    .gate-check input {
+      margin-top: 3px;
+      accent-color: var(--yb);
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+    }
+
+    .gate-check label {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.5;
+      cursor: pointer;
+    }
+
+    .gate-pw label {
+      display: block;
+      font-size: 10px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 3px;
+    }
+
+    .gate-pw input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid #ddd;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .gate-pw input:focus {
+      border-color: var(--yb);
+    }
+
+    .gate-err {
+      font-size: 11px;
+      color: #e74c3c;
+      min-height: 16px;
+      margin: 6px 0;
+    }
+
+    .gate-go {
+      width: 100%;
+      padding: 11px;
+      background: var(--yb);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .gate-go:disabled {
+      opacity: .35;
+      cursor: not-allowed;
+    }
+
+    .gate-foot {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 9.5px;
+      color: #bbb;
+      line-height: 1.5;
+    }
+
+    .content {
+      display: none;
+      width: 100%;
+      height: 100%;
+    }
+
+    .content.on {
+      display: block;
+    }
+
+    @media(max-width:600px) {
+      .gate-card {
+        padding: 20px 18px;
+        border-radius: 14px;
+        max-height: 95vh;
+      }
+
+      .gate-card h1 {
+        font-size: 19px;
+      }
+
+      .gate-welcome {
+        font-size: 12px;
+      }
+
+      .gate-terms {
+        max-height: 130px;
+        font-size: 11px;
+      }
     }
   </style>
 </head>
@@ -66,34 +236,34 @@
 
 <!-- GATE -->
 <div class="gate" id="gate">
-<div class="gate-card">
-  <h1>EWSS Housing Resources</h1>
-  <div class="gate-sub">Eli Whitney Students Society</div>
-  <div class="gate-welcome">
-    Welcome! This resource is maintained by and for Eli Whitney Scholars. It is <strong>not</strong> provided by, affiliated with, or endorsed by Yale University.
+  <div class="gate-card">
+    <h1>Housing Guide</h1>
+    <div class="gate-sub">Eli Whitney Students Society</div>
+    <div class="gate-welcome">
+      Welcome! This resource is maintained by and for Eli Whitney Scholars. It is <strong>not</strong> provided by, affiliated with, or endorsed by Yale University.
+    </div>
+    <div class="gate-terms">
+      <h4>Quick Ground Rules</h4>
+      <ul>
+        <li><strong>Keep it private.</strong> Information here stays within our cohort. No sharing or forwarding to anyone outside the group.</li>
+        <li><strong>Be respectful.</strong> Use this resource in the spirit of our community.</li>
+        <li><strong>No guarantees.</strong> Details may change. When in doubt, verify independently.</li>
+        <li><strong>Access is revocable.</strong> EWSS leadership may revoke access at any time.</li>
+        <li><strong>Access is logged.</strong> Your IP address and access time are recorded for security. Misuse may result in revoked access.</li>
+      </ul>
+    </div>
+    <div class="gate-check">
+      <input type="checkbox" id="gateAgree">
+      <label for="gateAgree">I understand these are community ground rules, and I agree to respect them.</label>
+    </div>
+    <div class="gate-pw">
+      <label>Access Password</label>
+      <input type="password" id="gatePw" placeholder="Enter password" autocomplete="off">
+    </div>
+    <div class="gate-err" id="gateErr"></div>
+    <button class="gate-go" id="gateGo" disabled onclick="tryAccess()">Enter</button>
+    <div class="gate-foot">This tool is maintained by EWSS and is not affiliated with Yale University.<br>Unauthorized access attempts are logged.</div>
   </div>
-  <div class="gate-terms">
-    <h4>Quick Ground Rules</h4>
-    <ul>
-      <li><strong>Keep it private.</strong> Information here stays within our cohort. No sharing or forwarding to anyone outside the group.</li>
-      <li><strong>Be respectful.</strong> Use this resource in the spirit of our community.</li>
-      <li><strong>No guarantees.</strong> Details may change. When in doubt, verify independently.</li>
-      <li><strong>Access is revocable.</strong> EWSS leadership may revoke access at any time.</li>
-      <li><strong>Access is logged.</strong> Your IP address and access time are recorded for security. Misuse may result in revoked access.</li>
-    </ul>
-  </div>
-  <div class="gate-check">
-    <input type="checkbox" id="gateAgree">
-    <label for="gateAgree">I understand these are community ground rules, and I agree to respect them.</label>
-  </div>
-  <div class="gate-pw">
-    <label>Access Password</label>
-    <input type="password" id="gatePw" placeholder="Enter password" autocomplete="off">
-  </div>
-  <div class="gate-err" id="gateErr"></div>
-  <button class="gate-go" id="gateGo" disabled onclick="tryAccess()">Enter</button>
-  <div class="gate-foot">This tool is maintained by EWSS and is not affiliated with Yale University.<br>Unauthorized access attempts are logged.</div>
-</div>
 </div>
 
 <!-- CONTENT (hidden until auth) -->
